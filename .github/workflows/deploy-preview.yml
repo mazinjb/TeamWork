@@ -1,0 +1,156 @@
+name: PR Live Preview & Scope Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: "gh-pages-deploy"
+  cancel-in-progress: false
+
+jobs:
+  verify-isolation:
+    name: فحص استقلالية الأقسام (Scope Check)
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - name: سحب الكود للمقارنة
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: فحص الملفات المعدلة في هذا الـ PR
+        id: check
+        run: |
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          echo "الملفات التي تم تعديلها:"
+          echo "$CHANGED_FILES"
+
+          SECTIONS_TOUCHED=$(echo "$CHANGED_FILES" | grep -E '^sections/[^/]+/' | cut -d'/' -f2 | sort -u || true)
+          SECTION_COUNT=$(echo "$SECTIONS_TOUCHED" | sed '/^$/d' | wc -l)
+
+          echo "الأقسام المعدلة: $SECTIONS_TOUCHED (العدد: $SECTION_COUNT)"
+
+          if [ "$SECTION_COUNT" -gt 1 ] && [ "${{ github.actor }}" != "mazinjb" ]; then
+            echo "::error::لا يُسمح للمطور بتعديل أكثر من قسم واحد في نفس الـ Pull Request لضمان استقلالية العمل."
+            exit 1
+          fi
+
+          if echo "$CHANGED_FILES" | grep -qE '^(\.github/|shared/|index\.html)' && [ "${{ github.actor }}" != "mazinjb" ]; then
+            echo "::warning::تم رصد تعديل في الملفات المشتركة أو الإعدادات العامة، وهو يتطلب مراجعة خاصة من المسؤول @mazinjb."
+          fi
+
+  deploy-preview:
+    name: تجهيز نسخة المعاينة (PR Preview)
+    needs: verify-isolation
+    if: github.event.action != 'closed' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: سحب كود تعديل المطور
+        uses: actions/checkout@v4
+
+      - name: تجهيز ملفات المعاينة
+        run: |
+          mkdir -p /tmp/pr-build
+          cp -r index.html shared sections /tmp/pr-build/
+
+      - name: نشر نسخة المعاينة على المسار /pr-${{ github.event.number }}/
+        run: |
+          PR_DIR="pr-${{ github.event.number }}"
+          git fetch origin gh-pages || true
+          if git show-ref --verify --quiet refs/remotes/origin/gh-pages; then
+            git checkout gh-pages
+          else
+            git checkout --orphan gh-pages
+            git rm -rf . || true
+            touch .nojekyll
+          fi
+
+          rm -rf "$PR_DIR"
+          mkdir -p "$PR_DIR"
+          cp -r /tmp/pr-build/* "$PR_DIR/"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "نسخة المعاينة محدثة بالفعل"
+          else
+            git commit -m "🔍 نشر معاينة للـ PR رقم #${{ github.event.number }}"
+            git push origin gh-pages
+          fi
+
+      - name: إضافة تعليق برابط المعاينة للمسؤول في الـ PR
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const prNumber = context.issue.number;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const previewUrl = `https://${owner}.github.io/${repo}/pr-${prNumber}/`;
+            const body = [
+              `### 🚀 نسخة المعاينة (Live Preview) جاهزة للتجربة!`,
+              ``,
+              `تم بناء نسخة معاينة مستقلة لهذا التعديل من الفرع \`${context.payload.pull_request.head.ref}\`:`,
+              ``,
+              `🔗 **الرابط العام للمعاينة:** [${previewUrl}](${previewUrl})`,
+              `> 💡 **روابط سريعة للأقسام داخل هذه المعاينة:**`,
+              `> - [🏠 الرئيسية (Home)](${previewUrl}sections/home/index.html)`,
+              `> - [👥 الفريق (Team)](${previewUrl}sections/team/index.html)`,
+              `> - [🛠️ الخدمات (Services)](${previewUrl}sections/services/index.html)`,
+              `> - [📞 التواصل (Contact)](${previewUrl}sections/contact/index.html)`,
+              ``,
+              `---`,
+              `👮‍♂️ **بانتظار مراجعة واعتماد المسؤول (@mazinjb)** قبل الدمج في النسخة الرئيسية \`main\`.`
+            ].join('\n');
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner,
+              repo,
+              issue_number: prNumber,
+            });
+            const botComment = comments.find(c => c.body.includes('نسخة المعاينة (Live Preview) جاهزة للتجربة'));
+
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner,
+                repo,
+                comment_id: botComment.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner,
+                repo,
+                issue_number: prNumber,
+                body,
+              });
+            }
+
+  cleanup-preview:
+    name: حذف نسخة المعاينة بعد إغلاق أو دمج الـ PR
+    if: github.event.action == 'closed' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - name: سحب فرع النشر gh-pages
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+
+      - name: إزالة مجلد المعاينة المؤقت
+        run: |
+          PR_DIR="pr-${{ github.event.number }}"
+          if [ -d "$PR_DIR" ]; then
+            rm -rf "$PR_DIR"
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "🧹 حذف معاينة الـ PR المغلق #${{ github.event.number }}"
+            git push origin gh-pages
+          fi

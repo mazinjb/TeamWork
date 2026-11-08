@@ -1,0 +1,55 @@
+name: Deploy Main Site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "gh-pages-deploy"
+  cancel-in-progress: false
+
+jobs:
+  deploy-main:
+    name: نشر النسخة الرئيسية المعتمدة
+    runs-on: ubuntu-latest
+    steps:
+      - name: سحب كود الفرع الرئيسي (main)
+        uses: actions/checkout@v4
+
+      - name: تجهيز ملفات الموقع للنشر
+        run: |
+          mkdir -p /tmp/site-build
+          cp -r index.html shared sections /tmp/site-build/
+          touch /tmp/site-build/.nojekyll
+
+      - name: النشر على فرع gh-pages مع الحفاظ على معاينات الـ PR النشطة
+        run: |
+          git fetch origin gh-pages || true
+          if git show-ref --verify --quiet refs/remotes/origin/gh-pages; then
+            git checkout gh-pages
+          else
+            git checkout --orphan gh-pages
+            git rm -rf . || true
+          fi
+
+          # حذف ملفات الموقع الرئيسي القديمة مع الإبقاء على مجلدات المعاينة pr-*
+          find . -maxdepth 1 ! -name '.' ! -name '..' ! -name '.git' ! -name 'pr-*' -exec rm -rf {} +
+
+          # نسخ النسخة الرئيسية الجديدة
+          cp -r /tmp/site-build/* .
+          cp /tmp/site-build/.nojekyll .
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "لا توجد تغييرات جديدة للنشر"
+          else
+            git commit -m "🚀 تحديث الموقع الرئيسي من الفرع main (${GITHUB_SHA::7})"
+            git push origin gh-pages
+          fi
