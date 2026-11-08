@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+
+:root {
+  --bg-main: #0f172a;
+  --bg-card: #1e293b;
+  --bg-card-hover: #26354d;
+  --border-color: #334155;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --accent: #38bdf8;
+  --accent-hover: #0ea5e9;
+  --success: #22c55e;
+  --warning: #f59e0b;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  direction: rtl;
+  text-align: right;
+  font-family: 'Tajawal', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.tw-navbar {
+  background-color: rgba(30, 41, 59, 0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.tw-navbar-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.tw-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.tw-brand-badge {
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--accent);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  font-size: 0.75rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.tw-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.tw-nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 0.45rem 0.95rem;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.tw-nav-links a:hover {
+  color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.tw-nav-links a.active {
+  color: var(--bg-main);
+  background-color: var(--accent);
+}
+
+.tw-container {
+  max-width: 1100px;
+  margin: 2.5rem auto;
+  padding: 0 1.5rem;
+  flex: 1;
+  width: 100%;
+}
+
+.tw-hero {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
+  border: 1px solid var(--border-color);
+  border-radius: 1.25rem;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.tw-owner-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: rgba(34, 197, 94, 0.12);
+  color: var(--success);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.tw-hero h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+}
+
+.tw-hero p {
+  color: var(--text-secondary);
+  font-size: 1.05rem;
+  max-width: 750px;
+}
+
+.tw-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.tw-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.tw-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+}
+
+.tw-card h3 {
+  font-size: 1.15rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.tw-card p {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
+
+.tw-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--accent);
+  color: var(--bg-main);
+  font-weight: 700;
+  padding: 0.65rem 1.35rem;
+  border-radius: 0.65rem;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
+}
+
+.tw-btn:hover {
+  background-color: var(--accent-hover);
+}
+
+.tw-footer {
+  border-top: 1px solid var(--border-color);
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-top: auto;
+}
+
+code {
+  direction: ltr;
+  unicode-bidi: embed;
+  background: rgba(15, 23, 42, 0.7);
+  padding: 0.15rem 0.45rem;
+  border-radius: 0.35rem;
+  font-size: 0.85em;
+  color: var(--accent);
+}

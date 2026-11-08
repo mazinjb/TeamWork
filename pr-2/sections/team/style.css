@@ -1,0 +1,24 @@
+/* ملف التنسيق الخاص بمطور قسم الفريق (Team) فقط */
+
+.team-role {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  background: rgba(56, 189, 248, 0.12);
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  margin-bottom: 0.65rem;
+}
+
+.team-lead-card {
+  border-color: rgba(56, 189, 248, 0.55);
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.98), rgba(14, 165, 233, 0.08));
+}
+
+/* تمييز بطاقة المطور رقم 2 بعد تحديثها */
+.team-dev2-highlight {
+  border: 2px solid var(--success);
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.98), rgba(34, 197, 94, 0.12));
+}
+
