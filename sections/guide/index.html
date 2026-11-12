@@ -3,173 +3,216 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TeamWork – دليل المدير المرجعي (Admin Guide)</title>
+  <title>TeamWork – الدروس ودورة حياة الفريق والإدارة</title>
   <link rel="stylesheet" href="../../shared/css/base.css">
   <link rel="stylesheet" href="style.css">
 </head>
 <body data-section="guide" data-root="../../">
   <main class="tw-container">
     <section class="tw-hero guide-hero">
-      <span class="tw-owner-tag">📖 مرجع الإدارة المعتمد (@mazinjb)</span>
-      <h1>دليل المدير المرجعي لإدارة الفريق عبر GitHub</h1>
+      <span class="tw-owner-tag">📖 الملخص التنفيذي الشامل (@mazinjb)</span>
+      <h1>ملخص الدروس ودورة حياة الفريق والإدارة</h1>
       <p>
-        هذه الصفحة هي مرجعك السريع والدائم لتذكر جميع المصطلحات، الإعدادات، والأزرار التي تحتاجها لإدارة فريق المطورين عن بُعد في مشروع <strong>TeamWork</strong> ومشروع <strong>ComeHere</strong> دون الحاجة لحفظ أي أوامر.
+        مرجع مختصر وواضح يشرح: كيف تبدأ دورة حياة العمل من لحظة تكليف المطور بالمهمة، وكيف يعمل كل فريق باستقلالية، وكيف تدير وتعتمد التعديلات خطوة بخطوة.
       </p>
       <div class="guide-quick-links">
-        <a href="https://github.com/mazinjb/TeamWork" target="_blank" class="tw-btn">🔗 فتح مستودع GitHub</a>
-        <a href="https://github.com/mazinjb/TeamWork/pulls" target="_blank" class="tw-btn guide-btn-secondary">📋 طلبات المطورين (Pull Requests)</a>
+        <a href="https://github.com/mazinjb/TeamWork" target="_blank" class="tw-btn">🔗 مستودع GitHub</a>
+        <a href="https://github.com/mazinjb/TeamWork/pulls" target="_blank" class="tw-btn guide-btn-secondary">📋 طلبات الموافقة (Pull Requests)</a>
       </div>
     </section>
 
-    <!-- 1. القاموس السريع -->
+    <!-- 1. دورة الحياة الكاملة بين الإدارة والفريق -->
     <section class="guide-section">
-      <h2 class="guide-title">1️⃣ القاموس السريع (6 كلمات فقط تهمك في GitHub)</h2>
+      <h2 class="guide-title">🔄 أولاً: دورة الحياة الكاملة (من الفكرة حتى النشر الرسمي)</h2>
+      <div class="lifecycle-grid">
+        <div class="lifecycle-card role-admin">
+          <div class="lifecycle-header">
+            <span class="lifecycle-step">الخطوة 1</span>
+            <span class="role-tag admin-tag">👑 دور الإدارة (المدير)</span>
+          </div>
+          <h3>التكليف وتوزيع الغرف</h3>
+          <p>يحدد المدير مهمة كل مطور ويعطيه صلاحية الدخول للمستودع، مع تحديد المجلد الخاص به فقط (مثلاً: المطور 2 مسؤول عن <code>sections/team/</code>).</p>
+        </div>
+
+        <div class="lifecycle-card role-dev">
+          <div class="lifecycle-header">
+            <span class="lifecycle-step">الخطوة 2</span>
+            <span class="role-tag dev-tag">👨‍💻 دور المطور (الفريق)</span>
+          </div>
+          <h3>إنشاء مسودة والتطوير محلياً</h3>
+          <p>يسحب المطور أحدث نسخة على جهازه، وينشئ فرع مسودة مستقل (<code>Branch</code>)، ثم يبرمج تعديله داخل مجلد قسمه فقط ويختبره على جهازه.</p>
+        </div>
+
+        <div class="lifecycle-card role-dev">
+          <div class="lifecycle-header">
+            <span class="lifecycle-step">الخطوة 3</span>
+            <span class="role-tag dev-tag">👨‍💻 دور المطور (الفريق)</span>
+          </div>
+          <h3>رفع المسودة وطلب الموافقة (PR)</h3>
+          <p>يرفع المطور مسودته إلى GitHub ويفتح طلب دمج (<code>Pull Request</code>). هنا يظهر له القفل الأحمر ولا يستطيع دمج شغله بنفسه أبداً.</p>
+        </div>
+
+        <div class="lifecycle-card role-bot">
+          <div class="lifecycle-header">
+            <span class="lifecycle-step">الخطوة 4</span>
+            <span class="role-tag bot-tag">🤖 دور الروبوت التلقائي</span>
+          </div>
+          <h3>فحص العزل وتجهيز المعاينة</h3>
+          <p>يتأكد الروبوت أن المطور لم يلمس غرف زملائه، ثم ينشر نسخة معاينة مؤقتة (<code>/pr-X/</code>) ويكتب رابطها في تعليق للمدير.</p>
+        </div>
+
+        <div class="lifecycle-card role-admin">
+          <div class="lifecycle-header">
+            <span class="lifecycle-step">الخطوة 5</span>
+            <span class="role-tag admin-tag">👑 دور الإدارة (المدير)</span>
+          </div>
+          <h3>المعاينة واتخاذ القرار</h3>
+          <p>يضغط المدير على رابط المعاينة ويجرب التعديل بالمتصفح: إما أن يوافق (<code>Approve</code>) فيفتح القفل، أو يطلب تعديلاً (<code>Request changes</code>).</p>
+        </div>
+
+        <div class="lifecycle-card role-admin">
+          <div class="lifecycle-header">
+            <span class="lifecycle-step">الخطوة 6</span>
+            <span class="role-tag admin-tag">👑 دور الإدارة (المدير)</span>
+          </div>
+          <h3>الدمج وتحديث الموقع الرسمي</h3>
+          <p>يضغط المدير زر <code>Merge pull request</code> فينتقل التعديل فوراً للموقع الرسمي (<code>main</code>)، ويحذف الروبوت رابط المعاينة المؤقت.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. المقارنة الواضحة بين مهام الإدارة ومهام الفريق -->
+    <section class="guide-section">
+      <h2 class="guide-title">⚖️ ثانياً: الفرق بين دورة حياة "المطور" ودورة حياة "المدير"</h2>
+      <div class="roles-comparison">
+        <div class="tw-card role-box-admin">
+          <h3>👑 دورة عمل المدير (`@mazinjb`) — من المتصفح فقط</h3>
+          <ol class="role-list">
+            <li><strong>استلام الإشعار:</strong> يصلك إشعار بوجود <code>Pull Request</code> جديد من أحد المطورين.</li>
+            <li><strong>تجربة المعاينة:</strong> تضغط على رابط المعاينة (<code>Live Preview</code>) الموجود في تعليق الروبوت لتجربة التعديل.</li>
+            <li><strong>المراجعة (Review):</strong> تضغط <code>Files changed</code> ثم الزر الأخضر <code>Submit review</code>:
+              <ul>
+                <li>تختار <strong>Approve</strong> إذا كان العمل ممتازاً.</li>
+                <li>تختار <strong>Request changes</strong> إذا كان يحتاج إصلاحاً.</li>
+              </ul>
+            </li>
+            <li><strong>النشر النهائي (Merge):</strong> تضغط <code>Merge pull request</code> ثم <code>Confirm merge</code> ثم <code>Delete branch</code>.</li>
+            <li><strong>التراجع عند الطوارئ (Revert):</strong> إذا ظهر خطأ بعد النشر، تضغط زر <code>Revert</code> لإلغاء التعديل فوراً.</li>
+          </ol>
+        </div>
+
+        <div class="tw-card role-box-dev">
+          <h3>👨‍💻 دورة عمل المطور (الفريق عن بُعد) — على جهازه</h3>
+          <ol class="role-list">
+            <li><strong>تحديث النسخة:</strong> يسحب أحدث نسخة من الموقع الرسمي (<code>git pull origin main</code>).</li>
+            <li><strong>فتح مسودة جديدة:</strong> ينشئ فرعاً باسم مهمته (<code>git checkout -b feat/my-task</code>).</li>
+            <li><strong>الالتزام بغرفته:</strong> يعدل فقط داخل مجلده المخصص (مثلاً <code>sections/team/</code>) ويختبره محلياً.</li>
+            <li><strong>الرفع لـ GitHub:</strong> يحفظ ويرفع المسودة (<code>git push</code>) ويفتح <code>Pull Request</code>.</li>
+            <li><strong>انتظار قرار المدير:</strong> ينتظر مراجعتك؛ فإن طلبت تعديلات يصلحها ويرفعها فتتحدث المعاينة تلقائياً حتى توافق.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ملخص الدروس العملية (ما أنجزناه وما سنتدرب عليه) -->
+    <section class="guide-section">
+      <h2 class="guide-title">🎓 ثالثاً: ملخص الدروس العملية (سجل التدريب خطوة بخطوة)</h2>
+      <div class="lessons-list">
+
+        <article class="lesson-card lesson-done">
+          <div class="lesson-badge-row">
+            <span class="lesson-num">الدرس الأول</span>
+            <span class="status-done">✅ تم تطبيقه</span>
+          </div>
+          <h3>تأسيس المستودع، عزل الغرف، وتفعيل النشر التلقائي (GitHub Pages)</h3>
+          <p><strong>الفكرة المختصرة:</strong> بدلاً من أن يعمل المطورون في ملف واحد ويتصادموا، قسمنا الموقع إلى 4 مجلدات معزولة (<code>home</code>, <code>team</code>, <code>services</code>, <code>contact</code>)، وبرمجنا روبوت <code>GitHub Actions</code> ليعرض الموقع الرسمي على الإنترنت تلقائياً عبر الفرع <code>gh-pages</code>.</p>
+        </article>
+
+        <article class="lesson-card lesson-done">
+          <div class="lesson-badge-row">
+            <span class="lesson-num">الدرس الثاني</span>
+            <span class="status-done">✅ تم تطبيقه (PR #1)</span>
+          </div>
+          <h3>فهم المسودة (Branch) ورابط المعاينة المؤقت (Live Preview)</h3>
+          <p><strong>الفكرة المختصرة:</strong> قام المطور الأول بإنشاء مسودة <code>feat/home-dev1</code> وإضافة شريط الإحصائيات في الرئيسية. شاهدنا كيف ظل الموقع الرسمي دون تغيير، بينما قام الروبوت ببناء رابط معاينة خاص (<code>/pr-1/</code>) لتجربته قبل الدمج.</p>
+        </article>
+
+        <article class="lesson-card lesson-done">
+          <div class="lesson-badge-row">
+            <span class="lesson-num">الدرس الثالث</span>
+            <span class="status-done">✅ تم تطبيقه (PR #2)</span>
+          </div>
+          <h3>قفل الفرع الرئيسي (Branch Protection) واعتماد مطور خارجي (`@mazinprog`)</h3>
+          <p><strong>الفكرة المختصرة:</strong> أضفنا حساب المطور الثاني <code>mazinprog</code> وفعلنا القفل على الفرع الرئيسي <code>main</code> مع <code>CODEOWNERS</code>. عندما رفع المطور تعديله في قسم الفريق، ظهر له القفل الأحمر (<code>Merging is blocked</code>)، ولم يُفتح الزر الأخضر إلا بعد دخول المدير <code>mazinjb</code> والضغط على <code>Approve</code>.</p>
+        </article>
+
+        <article class="lesson-card lesson-next">
+          <div class="lesson-badge-row">
+            <span class="lesson-num">الدرس الرابع</span>
+            <span class="status-next">🔜 التمرين القادم</span>
+          </div>
+          <h3>رفض التعديل وطلب الإصلاح من المطور (`Request Changes`)</h3>
+          <p><strong>الفكرة المختصرة:</strong> ماذا تفعل كمدير إذا فتحت رابط المعاينة لقسم الخدمات (<code>services</code>) ووجدت خطأ أو تصميماً غير مناسب؟ سنتدرب على الضغط على <code>Request changes</code> وكتابة ملاحظة للمطور، وكيف يصلحها المطور وتتحدث المعاينة تلقائياً.</p>
+        </article>
+
+        <article class="lesson-card lesson-next">
+          <div class="lesson-badge-row">
+            <span class="lesson-num">الدرس الخامس</span>
+            <span class="status-next">🔜 تمرين متقدم</span>
+          </div>
+          <h3>حماية الغرف من التعدي (`Scope Check`)</h3>
+          <p><strong>الفكرة المختصرة:</strong> ماذا يحدث لو حاول مطور قسم التواصل (<code>contact</code>) تعديل ملف في قسم الرئيسية؟ سنتدرب على رؤية كيف يكشفه الروبوت الحارس ويرفض طلبه تلقائياً باللون الأحمر.</p>
+        </article>
+
+        <article class="lesson-card lesson-next">
+          <div class="lesson-badge-row">
+            <span class="lesson-num">الدرس السادس</span>
+            <span class="status-next">🔜 خطة التوسع لـ ComeHere</span>
+          </div>
+          <h3>تطبيق النظام على (Frontend + Backend) وتحديثات الموبايل (`EAS OTA`)</h3>
+          <p><strong>الفكرة المختصرة:</strong> عزل السيرفر وقاعدة البيانات وصلاحيات الدخول (<code>Roles</code>) في مستودع <code>Backend</code> سري خاص بالمدير، وتطبيق نظام الغرف والمعاينات على مستودع <code>Frontend</code> مع ربطه بباركود المعاينة وتحديثات الهواء (<code>OTA</code>) للجوال.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 4. قاموس الأزرار السريع -->
+    <section class="guide-section">
+      <h2 class="guide-title">🔑 رابعاً: معاني الأزرار التي تراها في شاشة GitHub</h2>
       <div class="tw-grid">
         <article class="tw-card guide-term-card">
-          <div class="term-badge">main</div>
-          <h3>النسخة الرسمية المعتمدة</h3>
-          <p>هي النسخة الأصلية لموقعك التي يراها الزوار. وضعنا عليها قفلاً فلا يستطيع أي مطور التعديل فيها مباشرة أبداً.</p>
+          <div class="term-badge">Create pull request</div>
+          <h3>إرسال طلب الموافقة</h3>
+          <p>يضغطه المطور بعد رفع مسودته ليطلب من المدير مراجعة شغله.</p>
         </article>
-
         <article class="tw-card guide-term-card">
-          <div class="term-badge">Branch (فرع)</div>
-          <h3>مسودة المطور الخاصة</h3>
-          <p>نسخة جانبية ينشئها المطور (مثل <code>feat/team-dev2</code>) ليجرب ويعدل فيها براحته دون أن يخرب الموقع الرسمي.</p>
+          <div class="term-badge">Add your review / Submit review</div>
+          <h3>بدء مراجعة المدير</h3>
+          <p>يضغطه المدير لفتح نافذة القرار (موافقة أو طلب تعديل).</p>
         </article>
-
         <article class="tw-card guide-term-card">
-          <div class="term-badge">Pull Request (PR)</div>
-          <h3>طلب الموافقة والدمج</h3>
-          <p>الطلب الذي يرسله المطور لك بعد انتهائه من المسودة ليقول لك: "أنهيت عملي، تفضل بمعاينته والموافقة عليه".</p>
+          <div class="term-badge">Approve</div>
+          <h3>موافقة وفك القفل ✅</h3>
+          <p>يختاره المدير عندما يعجبه التعديل في رابط المعاينة ليسمح بدمجه.</p>
         </article>
-
         <article class="tw-card guide-term-card">
-          <div class="term-badge">Live Preview</div>
-          <h3>رابط المعاينة المؤقت</h3>
-          <p>رابط يصنعه الروبوت تلقائياً داخل تعليق الطلب (مثل <code>/pr-2/</code>) لتجرب تعديل المطور بالمتصفح قبل اعتماده.</p>
+          <div class="term-badge">Request changes</div>
+          <h3>رفض مؤقت وطلب تعديل ❌</h3>
+          <p>يختاره المدير إذا وجد ملاحظة في المعاينة ويريد من المطور إصلاحها قبل الدمج.</p>
         </article>
-
         <article class="tw-card guide-term-card">
-          <div class="term-badge">Approve / Request changes</div>
-          <h3>قرار المدير (قبول أو رفض)</h3>
-          <p><code>Approve</code> يفتح القفل ويسمح بالنشر، بينما <code>Request changes</code> يبقي القفل مغلقاً ويطلب من المطور تعديل أخطائه.</p>
+          <div class="term-badge">Merge pull request</div>
+          <h3>الاعتماد والنشر في الموقع الرسمي 🚀</h3>
+          <p>الزر الأخضر النهائي الذي ينقل التعديل للموقع الرئيسي بعد الموافقة.</p>
         </article>
-
         <article class="tw-card guide-term-card">
-          <div class="term-badge">Merge / Revert</div>
-          <h3>الدمج أو التراجع الفوري</h3>
-          <p><code>Merge</code> ينقل تعديل المطور للموقع الرسمي، و <code>Revert</code> يلغي التعديل فوراً ويعيد الموقع كما كان لو ظهر خطأ لاحقاً.</p>
+          <div class="term-badge">Revert</div>
+          <h3>التراجع الفوري ↩️</h3>
+          <p>يلغي التعديل بعد دمجه ويعيد الموقع لحالته السابقة بضغطة زر واحدة.</p>
         </article>
       </div>
     </section>
 
-    <!-- 2. دورة عمل المدير في 3 خطوات -->
-    <section class="guide-section">
-      <h2 class="guide-title">2️⃣ كيف تراجع وتعتمد شغل أي مطور في 30 ثانية؟</h2>
-      <div class="guide-steps">
-        <div class="guide-step-item">
-          <div class="step-num">1</div>
-          <div class="step-content">
-            <h3>افتح الطلب وجرب رابط المعاينة (Preview)</h3>
-            <p>
-              ادخل على تبويب <strong>Pull requests</strong> في GitHub، وافتح طلب المطور الجديد. ستجد تعليقاً تلقائياً من الروبوت (<code>github-actions bot</code>) يحتوي على <strong>الرابط العام للمعاينة</strong>. اضغط عليه وتأكد من شكل التعديل في المتصفح.
-            </p>
-          </div>
-        </div>
-
-        <div class="guide-step-item">
-          <div class="step-num">2</div>
-          <div class="step-content">
-            <h3>اتخذ قرارك (موافقة Approve أو طلب تعديل Request changes)</h3>
-            <p>
-              اضغط على الزر الأخضر <strong>Add your review</strong> في أعلى يمين الصفحة (أو افتح تبويب <strong>Files changed</strong> ثم اضغط <strong>Submit review</strong>):
-            </p>
-            <ul class="guide-sublist">
-              <li>✅ <strong>إذا أعجبك الشغل:</strong> اختر <code>Approve</code> ثم اضغط <code>Submit review</code> (سينفك القفل الأحمر فوراً).</li>
-              <li>❌ <strong>إذا كان يحتاج تعديل:</strong> اختر <code>Request changes</code>، واكتب ملاحظتك للمطور، ثم اضغط <code>Submit review</code>.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="guide-step-item">
-          <div class="step-num">3</div>
-          <div class="step-content">
-            <h3>ادمج التعديل في الموقع الرسمي (Merge)</h3>
-            <p>
-              بعد الموافقة، انزل لأسفل صفحة الطلب واضغط الزر الأخضر <strong>Merge pull request</strong> ثم <strong>Confirm merge</strong>، ثم اضغط <strong>Delete branch</strong> لحذف مسودة المطور المؤقتة. خلال دقيقة سينزل التعديل في موقعك الرسمي!
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3. تقسيم الغرف والصلاحيات -->
-    <section class="guide-section">
-      <h2 class="guide-title">3️⃣ خريطة غرف المطورين وقوانين الحماية</h2>
-      <div class="guide-table-wrapper">
-        <table class="guide-table">
-          <thead>
-            <tr>
-              <th>القسم</th>
-              <th>المجلد المسموح للمطور</th>
-              <th>المسؤول عن المراجعة والاعتماد</th>
-              <th>الحالة التدريبية</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>🏠 الرئيسية (Home)</td>
-              <td><code>sections/home/</code></td>
-              <td><code>@mazinjb</code></td>
-              <td><span class="status-done">✅ تم التدريب (PR #1)</span></td>
-            </tr>
-            <tr>
-              <td>👥 الفريق (Team)</td>
-              <td><code>sections/team/</code></td>
-              <td><code>@mazinjb</code> (مع المطور <code>@mazinprog</code>)</td>
-              <td><span class="status-done">✅ تم التدريب (PR #2)</span></td>
-            </tr>
-            <tr>
-              <td>🛠️ الخدمات (Services)</td>
-              <td><code>sections/services/</code></td>
-              <td><code>@mazinjb</code></td>
-              <td><span class="status-next">🔜 التمرين القادم (Request Changes)</span></td>
-            </tr>
-            <tr>
-              <td>📞 التواصل (Contact)</td>
-              <td><code>sections/contact/</code></td>
-              <td><code>@mazinjb</code></td>
-              <td><span class="status-next">🔜 تمرين فحص العزل (Scope Check)</span></td>
-            </tr>
-            <tr>
-              <td>⚙️ الملفات المشتركة والأتمتة</td>
-              <td><code>shared/</code> و <code>.github/</code></td>
-              <td><code>@mazinjb</code> (ممنوع على المطورين)</td>
-              <td><span class="status-done">🔒 محمي بالكامل</span></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- 4. الإعدادات التي تم تفعيلها لمرة واحدة -->
-    <section class="guide-section">
-      <h2 class="guide-title">4️⃣ كيف أعددنا هذا المستودع؟ (لتكرارها في ComeHere مستقبلاً)</h2>
-      <div class="tw-grid">
-        <article class="tw-card">
-          <h3>🌐 1. تفعيل GitHub Pages</h3>
-          <p>من <code>Settings &rarr; Pages</code>، اخترنا الفرع <code>gh-pages</code> والمجلد <code>/ (root)</code> ليقوم الروبوت بنشر الموقع الرئيسي وروابط المعاينة عليه تلقائياً.</p>
-        </article>
-        <article class="tw-card">
-          <h3>👥 2. دعوة المطورين (Collaborators)</h3>
-          <p>من <code>Settings &rarr; Collaborators</code>، نضغط <code>Add people</code> ونضيف حسابات المطورين ليتمكنوا من رفع فروعهم وفتح طلبات الدمج.</p>
-        </article>
-        <article class="tw-card">
-          <h3>🔒 3. قفل الفرع الرئيسي (Branch Protection)</h3>
-          <p>من <code>Settings &rarr; Branches</code>، أضفنا قاعدة حماية للفرع <code>main</code> مع تفعيل <code>Require a pull request</code> و <code>Require review from Code Owners</code>.</p>
-        </article>
-      </div>
-    </section>
   </main>
 
   <script src="../../shared/js/navbar.js"></script>
