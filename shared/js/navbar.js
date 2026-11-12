@@ -10,7 +10,8 @@
     { id: 'home', label: '🏠 الرئيسية (Home)', path: `${rootPrefix}sections/home/index.html` },
     { id: 'team', label: '👥 الفريق (Team)', path: `${rootPrefix}sections/team/index.html` },
     { id: 'services', label: '🛠️ الخدمات (Services)', path: `${rootPrefix}sections/services/index.html` },
-    { id: 'contact', label: '📞 التواصل (Contact)', path: `${rootPrefix}sections/contact/index.html` }
+    { id: 'contact', label: '📞 التواصل (Contact)', path: `${rootPrefix}sections/contact/index.html` },
+    { id: 'guide', label: '📖 دليل المدير (مرجع GitHub)', path: `${rootPrefix}sections/guide/index.html` }
   ];
 
   // فحص ما إذا كنا داخل رابط معاينة PR
