@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeamWork – دليل المدير المرجعي (Admin Guide)</title>
+  <link rel="stylesheet" href="../../shared/css/base.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-section="guide" data-root="../../">
+  <main class="tw-container">
+    <section class="tw-hero guide-hero">
+      <span class="tw-owner-tag">📖 مرجع الإدارة المعتمد (@mazinjb)</span>
+      <h1>دليل المدير المرجعي لإدارة الفريق عبر GitHub</h1>
+      <p>
+        هذه الصفحة هي مرجعك السريع والدائم لتذكر جميع المصطلحات، الإعدادات، والأزرار التي تحتاجها لإدارة فريق المطورين عن بُعد في مشروع <strong>TeamWork</strong> ومشروع <strong>ComeHere</strong> دون الحاجة لحفظ أي أوامر.
+      </p>
+      <div class="guide-quick-links">
+        <a href="https://github.com/mazinjb/TeamWork" target="_blank" class="tw-btn">🔗 فتح مستودع GitHub</a>
+        <a href="https://github.com/mazinjb/TeamWork/pulls" target="_blank" class="tw-btn guide-btn-secondary">📋 طلبات المطورين (Pull Requests)</a>
+      </div>
+    </section>
+
+    <!-- 1. القاموس السريع -->
+    <section class="guide-section">
+      <h2 class="guide-title">1️⃣ القاموس السريع (6 كلمات فقط تهمك في GitHub)</h2>
+      <div class="tw-grid">
+        <article class="tw-card guide-term-card">
+          <div class="term-badge">main</div>
+          <h3>النسخة الرسمية المعتمدة</h3>
+          <p>هي النسخة الأصلية لموقعك التي يراها الزوار. وضعنا عليها قفلاً فلا يستطيع أي مطور التعديل فيها مباشرة أبداً.</p>
+        </article>
+
+        <article class="tw-card guide-term-card">
+          <div class="term-badge">Branch (فرع)</div>
+          <h3>مسودة المطور الخاصة</h3>
+          <p>نسخة جانبية ينشئها المطور (مثل <code>feat/team-dev2</code>) ليجرب ويعدل فيها براحته دون أن يخرب الموقع الرسمي.</p>
+        </article>
+
+        <article class="tw-card guide-term-card">
+          <div class="term-badge">Pull Request (PR)</div>
+          <h3>طلب الموافقة والدمج</h3>
+          <p>الطلب الذي يرسله المطور لك بعد انتهائه من المسودة ليقول لك: "أنهيت عملي، تفضل بمعاينته والموافقة عليه".</p>
+        </article>
+
+        <article class="tw-card guide-term-card">
+          <div class="term-badge">Live Preview</div>
+          <h3>رابط المعاينة المؤقت</h3>
+          <p>رابط يصنعه الروبوت تلقائياً داخل تعليق الطلب (مثل <code>/pr-2/</code>) لتجرب تعديل المطور بالمتصفح قبل اعتماده.</p>
+        </article>
+
+        <article class="tw-card guide-term-card">
+          <div class="term-badge">Approve / Request changes</div>
+          <h3>قرار المدير (قبول أو رفض)</h3>
+          <p><code>Approve</code> يفتح القفل ويسمح بالنشر، بينما <code>Request changes</code> يبقي القفل مغلقاً ويطلب من المطور تعديل أخطائه.</p>
+        </article>
+
+        <article class="tw-card guide-term-card">
+          <div class="term-badge">Merge / Revert</div>
+          <h3>الدمج أو التراجع الفوري</h3>
+          <p><code>Merge</code> ينقل تعديل المطور للموقع الرسمي، و <code>Revert</code> يلغي التعديل فوراً ويعيد الموقع كما كان لو ظهر خطأ لاحقاً.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 2. دورة عمل المدير في 3 خطوات -->
+    <section class="guide-section">
+      <h2 class="guide-title">2️⃣ كيف تراجع وتعتمد شغل أي مطور في 30 ثانية؟</h2>
+      <div class="guide-steps">
+        <div class="guide-step-item">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h3>افتح الطلب وجرب رابط المعاينة (Preview)</h3>
+            <p>
+              ادخل على تبويب <strong>Pull requests</strong> في GitHub، وافتح طلب المطور الجديد. ستجد تعليقاً تلقائياً من الروبوت (<code>github-actions bot</code>) يحتوي على <strong>الرابط العام للمعاينة</strong>. اضغط عليه وتأكد من شكل التعديل في المتصفح.
+            </p>
+          </div>
+        </div>
+
+        <div class="guide-step-item">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h3>اتخذ قرارك (موافقة Approve أو طلب تعديل Request changes)</h3>
+            <p>
+              اضغط على الزر الأخضر <strong>Add your review</strong> في أعلى يمين الصفحة (أو افتح تبويب <strong>Files changed</strong> ثم اضغط <strong>Submit review</strong>):
+            </p>
+            <ul class="guide-sublist">
+              <li>✅ <strong>إذا أعجبك الشغل:</strong> اختر <code>Approve</code> ثم اضغط <code>Submit review</code> (سينفك القفل الأحمر فوراً).</li>
+              <li>❌ <strong>إذا كان يحتاج تعديل:</strong> اختر <code>Request changes</code>، واكتب ملاحظتك للمطور، ثم اضغط <code>Submit review</code>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="guide-step-item">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h3>ادمج التعديل في الموقع الرسمي (Merge)</h3>
+            <p>
+              بعد الموافقة، انزل لأسفل صفحة الطلب واضغط الزر الأخضر <strong>Merge pull request</strong> ثم <strong>Confirm merge</strong>، ثم اضغط <strong>Delete branch</strong> لحذف مسودة المطور المؤقتة. خلال دقيقة سينزل التعديل في موقعك الرسمي!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. تقسيم الغرف والصلاحيات -->
+    <section class="guide-section">
+      <h2 class="guide-title">3️⃣ خريطة غرف المطورين وقوانين الحماية</h2>
+      <div class="guide-table-wrapper">
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th>القسم</th>
+              <th>المجلد المسموح للمطور</th>
+              <th>المسؤول عن المراجعة والاعتماد</th>
+              <th>الحالة التدريبية</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>🏠 الرئيسية (Home)</td>
+              <td><code>sections/home/</code></td>
+              <td><code>@mazinjb</code></td>
+              <td><span class="status-done">✅ تم التدريب (PR #1)</span></td>
+            </tr>
+            <tr>
+              <td>👥 الفريق (Team)</td>
+              <td><code>sections/team/</code></td>
+              <td><code>@mazinjb</code> (مع المطور <code>@mazinprog</code>)</td>
+              <td><span class="status-done">✅ تم التدريب (PR #2)</span></td>
+            </tr>
+            <tr>
+              <td>🛠️ الخدمات (Services)</td>
+              <td><code>sections/services/</code></td>
+              <td><code>@mazinjb</code></td>
+              <td><span class="status-next">🔜 التمرين القادم (Request Changes)</span></td>
+            </tr>
+            <tr>
+              <td>📞 التواصل (Contact)</td>
+              <td><code>sections/contact/</code></td>
+              <td><code>@mazinjb</code></td>
+              <td><span class="status-next">🔜 تمرين فحص العزل (Scope Check)</span></td>
+            </tr>
+            <tr>
+              <td>⚙️ الملفات المشتركة والأتمتة</td>
+              <td><code>shared/</code> و <code>.github/</code></td>
+              <td><code>@mazinjb</code> (ممنوع على المطورين)</td>
+              <td><span class="status-done">🔒 محمي بالكامل</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 4. الإعدادات التي تم تفعيلها لمرة واحدة -->
+    <section class="guide-section">
+      <h2 class="guide-title">4️⃣ كيف أعددنا هذا المستودع؟ (لتكرارها في ComeHere مستقبلاً)</h2>
+      <div class="tw-grid">
+        <article class="tw-card">
+          <h3>🌐 1. تفعيل GitHub Pages</h3>
+          <p>من <code>Settings &rarr; Pages</code>، اخترنا الفرع <code>gh-pages</code> والمجلد <code>/ (root)</code> ليقوم الروبوت بنشر الموقع الرئيسي وروابط المعاينة عليه تلقائياً.</p>
+        </article>
+        <article class="tw-card">
+          <h3>👥 2. دعوة المطورين (Collaborators)</h3>
+          <p>من <code>Settings &rarr; Collaborators</code>، نضغط <code>Add people</code> ونضيف حسابات المطورين ليتمكنوا من رفع فروعهم وفتح طلبات الدمج.</p>
+        </article>
+        <article class="tw-card">
+          <h3>🔒 3. قفل الفرع الرئيسي (Branch Protection)</h3>
+          <p>من <code>Settings &rarr; Branches</code>، أضفنا قاعدة حماية للفرع <code>main</code> مع تفعيل <code>Require a pull request</code> و <code>Require review from Code Owners</code>.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="../../shared/js/navbar.js"></script>
+</body>
+</html>
